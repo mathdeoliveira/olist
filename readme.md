@@ -22,7 +22,19 @@
 ---
 
 ## Introdução
-a
+
+Esse projeto tem como intuito o aprendizado e experiência com diversas técnicas de Ciência de Dados. Após a aquisiçaõ de conhecimento a partir de diversos cursos, esse projeto vai servir para a aplicação do conhecimento em prática.
+
+O projeto seguirá o método de desenvolvimento CRISP-DS, onde teremos os seguintes processos:
+- Entendimento do negócio
+- Aquisição dos dados
+- Limpeza do dados
+- Análise exploratória dos dados
+- Preparação dos dados
+- Modelagem
+- Avaliação de performance
+- Deploy
+
 ---
 
 ## 1. Sobre o negócio
