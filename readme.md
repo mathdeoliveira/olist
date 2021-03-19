@@ -81,35 +81,35 @@ Dado que temos muitas variáveis, iremos iniciar uma análise descritiva para en
 
 #### 2.2.1. Informações dos dataset
 
-![](images/ecommerinfo.png)
+![](notebooks/images/ecommerinfo.png)
 
 A imagem acima nós da uma informação completa acerca do dataset, vemos que existe alguns valores nulos em algumas variáveis e o tipo que elas se encontram no momento. Já podemos afirmar que vamos precisar lidar com dados nulos, então podemos escolher as linhas nulas ou aplicar algum outro método e também temos que vamos fazer algumas transformações nos tipos das variáveis, como os campo de data por exemplo.
 
-![](images/mktinfo.png)
+![](notebooks/images/mktinfo.png)
 
 Continuando no segundo dataset, temos as todas informações sobre as variáveis do marketing funil e novamente vamos lidar com dados faltantes e transformação de alguns dados.
 
 #### 2.2.1. Descrição das variáveis númericas
 
-![](images/ecommerdescribe.png)
+![](notebooks/images/ecommerdescribe.png)
 
 Acima temos informações estatísticas sobre as variáveis, existe algumas variáveis que não tem motivos analisar, como o código do CEP(customer_zip_code_prefix) ou campos ID, mas temos que, os clientes divide as suas compras em 3x em média, houve alguma order onde o valor foi de $13.664, lembrando que uma order pode ter múltiplas linhas e temos que a nota que os clientes dão aos produtos tem em média 4 estrelas.
 
-![](images/mktdescribe.png)
+![](notebooks/images/mktdescribe.png)
 
 Tirando as informações das variáveis identificadora, podemos ver que existe um número altíssimo sobre o que o vendedor declarou para a Olist e os preços dos produtos que querem anunciar é de $134 em média.
 
-![](images/ecommerhist.png)
+![](notebooks/images/ecommerhist.png)
 
 Os gráficos acima é um histograma para algumas variáveis do dataset e-commerce, vemos que nenhuma segue uma distribuição normal, dependendo do algoritmo escolhido, isso pode ser um dos motivos de a performance ser baixa. Podemos olhar que a variável **price** a grande maioria dos dados estão concentrado entre $0 até $1000.
 
 #### 2.2.2. Descrição das variáveis categóricas
 
-![](images/ecommercat.png)
+![](notebooks/images/ecommercat.png)
 
 Nas análises acima, olhamos para as nossas variáveis númericas, a tabela acima olha para algumas variáveis categóricas. Temos algumas informações interessantes, os clientes e vendedores estão concentrados na cidade de São Paulo e no estado de São Paulo, o tipo de pagamento mais utilizado é o cartão de crédito e a categoria mais vendida é a cama, mesa e banho.
 
-![](images/mktcat.png)
+![](notebooks/images/mktcat.png)
 
 Para o dataset sobre funil de marketing, temos que o tipo que mais requisita à Olist a vender o seus produtos é do tipo revendedor, o segmento é de Saúde & Beleza e a origem do tipo de mídia onde foi adquirido foi de pesquisa orgânica. 
 
