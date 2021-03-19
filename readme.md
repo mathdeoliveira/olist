@@ -81,7 +81,7 @@ Dado que temos muitas variáveis, iremos iniciar uma análise descritiva para en
 
 #### 2.2.1. Informações dos dataset
 
-![](olist/notebooks/images/ecommerinfo.png)
+![](../dev/notebooks/images/ecommerinfo.png)
 
 A imagem acima nós da uma informação completa acerca do dataset, vemos que existe alguns valores nulos em algumas variáveis e o tipo que elas se encontram no momento. Já podemos afirmar que vamos precisar lidar com dados nulos, então podemos escolher as linhas nulas ou aplicar algum outro método e também temos que vamos fazer algumas transformações nos tipos das variáveis, como os campo de data por exemplo.
 
