@@ -156,12 +156,14 @@ Para o dataset sobre funil de marketing, temos que o tipo que mais requisita à 
 #### 2.3.2. Dataset marketing funil
 | Nome variável        | Descrição           |
 | ------------- |:-------------:| 
-| won_date      | Identificador único do cliente, pode ser o CPF, por exemplo |
+| won_date      | Data que o negócio foi fechado |
 | business_segment | Segmento do negócio |
 | lead_type| Tipo do lead |
 | lead_behaviour_profile| Perfil de comportamento do lead identificado pelo SDR |
 |has_company | O lead tem uma empresa com documentação formal?  |
 | has_gtin| O lead tem número de item comercial global (código de barras) para seus produtos? |
+| first_contact_date | Data da primeira solitação |
+|origin | Tipo de mídia onde o lead foi adquirido |
 
 ---
 
