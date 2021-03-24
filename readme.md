@@ -231,18 +231,23 @@ Essa análise vamos descrever algumas variáveis examinando a distribuição dos
 
 O gráfico abaixo nos mostra a distribuição da variável payment_value, que foi o valor da transação da venda, vemos que está bem concentrado em valores aaixo de $1.000 e vimos que na seção [sobre os dados](#2-sobre-os-dados) na parte da estatística descritiva existe valores outliers.
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/payment_dist.png?raw=true)
 
 Os status das orders dos nossos dados estão bem desbalanceados, como vemos abaixo, a grande maioria das orders já foram enviadas e um valor muito pequeno foram canceladas, com isso podemos ter algum problema a frente.
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/order_status_count.png?raw=true)
 
 O tipo de pagamento mais utilizado é cartão de crédito, como vemos abaixo, mas vemos que existe compras feitas por voucher, boleto e cartão de débito, também temos que pensar nessa proporção pequena de dados para cartão de débito.
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/payment_type_count.png?raw=true)
 
 Os reviews das vendas são bem positivos, a maioria está entre as notas 4 e 5, e interessante ver que a nota 5 é mais que o dobro maior que a nota 4.
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/review_score_count.png?raw=true)
 
 A categoria de produtos tem a maior quantidade de orders é a Cama & Mesa & Banho, não muito atrás, as outras seguem bem próximas das maiores do que e.a
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/product_category_name_count.png?raw=true)
 
 ### Análise bivariada
 
@@ -250,6 +255,7 @@ A análise bivariada nos permite a duas variáveis de forma simultânea, por iss
 
 **H1. Clientes que tiveram os seus pedidos enviados após a data da estimativa de entrega não voltam a comprar - FALSA**
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h1.png?raw=true)
 
 No gráfico temos que existe sim clientes que receberam os seus produtos após a data de estimativa, então houve algum tipo de atraso. Como a nossa hipótese levantada diz que os clientes tiveram os seus pedidos enviados após a data da estimativa de entrega não voltam a comprar, vamos capturar um exemplo da base onde o cliente comprou e teve atraso e após esse atraso voltou a comprar.
 
@@ -257,46 +263,59 @@ Vemos que na tabela existe um cliente que comprou com atraso e voltar a comprar 
 
 **H2. Clientes de SP são os que tem o maior volume de compra - VERDADEIRA**
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h2.png?raw=true)
+
 Fica evidente que a hipótese é verdadeira, tanto é que, a cidade RJ tem 63% menos em volume de venda do que SP. Em outras palavras, SP vende mais que o dobro da segunda colocada.
 
 **H3. Clientes que compram com cartão de crédito compra mais que do que aqueles que compram com boleto - VERDADEIRA**
+
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h3.png?raw=true)
 
 Novamente, é uma hipótese verdadeira, vemos que o método de pagamento cartão de crédito é o mais utilizado do que os outros, do total de venda de 20.418.288,15, o cartão de crédito foi responsável por 15.670.920,67 das vendas da empresa representando 76% do total.
 
 **H4. Clientes que tiveram as suas compras canceladas não voltam a comprar - VERDADEIRA**
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h4.png?raw=true)
 
 Essa hipótese é verdadeira, porém devemos levar em consideração que existe uma quantidade bem pouca sobre os clientes que cancelaram suas compras, das 115.711 orders, somente 7 clientes tem status cancelado. Por isso devemos capturar mais dados para realmente provar essa hipótese.
 
 **H5. Clientes que pagam alto valor de frete compram diversos produtos - VERDADEIRA**
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h5.png?raw=true)
 
 Hipótese verdadeira, mesmo que tenha algumas quedas na quantidade de produtos vs total pago pelo frete, quanto maior a quantidade de produtos distintos comprados maior é o valor do frete.
-
 
 **H6. Produtos com peso abaixo do primeiro quartil são os mais vendidos em termos de quantidade - FALSA**
 
 Sabemos que o primeiro quartil para a variável é ate 300 gramas, para tal, tivemos 28.071 vendas dos produtos abaixo de 300 gramas e para acima de 300 gramas tivemos 83.316, por isso a hipótese é falsa, produtos mais pesados que 300 gramas tem a maior quantidade vendida.
 
-
 **H7. Categoria do produto mais vendido é aquela relacionada a eletrônicos, pois o valor agregado é alto - VERDADEIRA***
+
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h7.png?raw=true)
 
 Para os dez primeiros, podemos parcialmente retirar algumas informações já que não temos um campo falando exatamente qual universo o produto se encontra. O produto com o maior valor vendido é relacionado a telefonia fixa, que em maior parte é um eletrônico, também vemos a categoria informática e acessórios, que também é eletrônicos, podemos confirmar essa hipótese, mas com atenção mostrando que existe outras categoria que também vende bem.
 
 **H8. Os produtos que tem mais fotos publicadas são os mais vendidos em termos de valor - FALSA**
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h8.png?raw=true)
+
 Hipótese falsa, não há evidências suficientes que quanto maior a quantidade de fotos publicada do produto, maior é o valor da venda, o gráfico ilustra uma queda no total vendido enquanto a quantidade de fotos publicadas aumenta, pode levar em consideração que o produto que tem 20 fotos publicadas teve total de vendas abaixo do que o produto com 19 fotos publicada.
 
-
 **H9. Produtos com nome longos são menos vendidos - FALSA**
+
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h9.png?raw=true)
 
 Hipótese falsa, existe exemplos de produtos com nomes longos onde vendeu uma quantidade bem alta.
 
 **H10. Produtos com descrição longas são os mais vendidos - FALSA**
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h10.png?raw=true)
+
 Hipótese falsa, quanto maior o tamanho da descrição do produto menor é a quantidade vendida desse produto.
 
 **H11. Produtos com grandes dimensões(altura, peso, largura...) são menos vendidos, porém tem alto retorno pro negócio - VERDADEIRA**
+
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h11.png?raw=true)
 
 Definindo que, produtos com grandes dimensões:
 - Peso acima de 10000 gramas (10kg)
@@ -308,41 +327,55 @@ Dado isso temos que, a hipótese é verdadeira, vemos no gráfico que os produto
 
 **H12. Vendedores de SP são os que mais atrasam os envios - VERDADEIRA**
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h12.png?raw=true)
+
 Hipótese verdadeira, os vendedores do estado de SP são os vendedores que mais atrasam o pedido do cliente.
 
 **H13. Os melhores vendedores, de acordo com a nota do review, são os que mais vendem produtos - FALSA**
+
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h13.png?raw=true)
 
 Hipótese falsa, vemos que existe um comportamento onde quanto maior a nota do vendedor, menor é a quantidade de produtos vendidos por ele, como exemplo os vendedores com nota entre 4,5 e 5, vendem menos que os vendedores com nota 4. Podemos explica isso também pela quantidade de vendedores que temos com nota maior que 4,5.
 
 **H14. Todas as compras feitas foram parceladas em 2x - FALSA**
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h14.png?raw=true)
+
 Hipótese falsa, as compras são feitas parceladas em diversas parcelas, e fica evidente que a maioria das parcelas não são parceladas, somente 1x,
 
 **H15. Quanto mais alta são as notas dos reviews menor as parcelas - FALSA**
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h15.png?raw=true)
+
 Hipótese falsa, não há evidências o suficiente para confirmar que quanto mais alta são as notas dos reviews menor as parcelas, vemos que não importa a nota do review, vamos ter compras com diversas quantidade de parcelas.
 
-
 **H16. Cartão de crédito é o método de pagamento que mais atrasa o envio para transportadora - VERDADEIRA**
+
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h16.png?raw=true)
 
 Hipótese verdadeira, vemos que o cartão de crédito é o método de pagamento que mais atrasa o envio para transportadora, isso é resultado de que a maioria das compras feitas na Olist são feitas com cartão de crédito, crescendo a quantidade de atrasos.
 
 **H17. A maioria das compras são feitas antes do dia 15 - VERDADEIRA**
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h17.png?raw=true)
+
 Hipótese verdadeira, por bem pouco, as vendas são feitas antes do dia 15, porém bem apertado para as vendas após o dia 15, atenção nessa hipótese pois pode ser indício de poucos dados para tomar essa decisão.
 
 **H18. Há um aumento no valor de vendas aprovadas no mês de dezembro - FALSA**
 
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h18.png?raw=true)
+
 Hipótese falsa, dentro de todos os meses dos anos que faz parte do nosso dataset, o mês de Dezembro é onde temos uma queda de vendas, comparado com o mês anterior. Podemos ver também que dezembro é o segundo mês que tem o menor valor total de vendas, somente atrás de setembro.
 
 **H19. Os leads que não fecharam o negócio são os que foram adquiridos por pesquisa orgânica - FALSA**
+
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/h19.png?raw=true)
 
 Hipótese falsa, mesmo que a origem dos leads que ainda não fecharam o negócio é pesquisa orgânica, ainda tem outras negócios não fechados para outras origens.
 
 **H20. Os leads que tem uma empresa formal são a maioria que fecham o negócio - VERDADEIRA**
 
 Hipótese verdadeira, a maioria dos vendedores que pedem requisição para virar parceiro da empresa, a maioria que fecham o negócio são vendedores que possuem empresa formal.
-
 
 ---
 
