@@ -169,10 +169,180 @@ Para o dataset sobre funil de marketing, temos que o tipo que mais requisita à 
 
 ## 3. Feature Engineering
 
+Afim de potencializar a nossa análise exploratória dos dados foi criado o mapa mental abaixo, com ela podemos nos guiar para criar hipóteses baseado no 
+negócio em si, retirando o maior número de insights possíveis com os dados que possuimos.
+
+![](https://github.com/mathdeoliveira/olist/blob/dev/notebooks/images/mind_map.jpg?raw=true)
+
+### Hipóteses
+#### Hipóteses clientes
+
+- Clientes que tiveram os seus pedidos enviados após a data da estimativa de entrega não voltam a comprar
+- Clientes de SP são os que tem o maior volume de compra
+- Clientes que compram com cartão de crédito compra mais que do que aqueles que compram com boleto
+- Clientes que tiveram as suas compras canceladas não voltam a comprar
+- Clientes que pagam alto valor de frete compram diversos produtos
+
+#### Hipóteses produtos
+- Produtos com peso abaixo do primeiro quartil são os mais vendidos em termos de quantidade
+- Categoria do produto mais vendido é aquela relacionada a eletrônicos, pois o valor agregado é alto
+- Os produtos que tem mais fotos publicadas são os mais vendidos em termos de valor
+- Produtos com nome longos são menos vendidos
+- Produtos com descrição longas são os mais vendidos
+- Produtos com grandes dimensões(altura, peso, largura...) são menos vendidos, porém tem alto retorno pro negócio
+
+#### Hipóteses vendedores
+- Vendedores de SP são os que mais atrasam os envios
+- Os melhores vendedores, de acordo com a nota do review, são os que mais vendem produtos
+
+#### Hipóteses pagamentos
+- Todas as compras feitas foram parceladas em 2x
+- Quanto mais alta são as notas dos reviews menor as parcelas
+- Cartão de crédito é o método de pagamento que mais atrasa o envio para transportadora
+
+#### Hipóteses temporal
+- A maioria das compras são feitas antes do dia 15
+- Há um aumento no valor de vendas aprovadas no mês de dezembro
+
+#### Hipóteses funil de marketing
+- Os leads que não fecharam o negócio são os que foram adquiridos por pesquisa orgânica
+- Os leads que tem uma empresa formal são a maioria que fecham o negócio
+
+#### Substituir valores faltantes
+
+As colunas **categóricas**:
+ - Para as colunas relacionadas ao review, como o título e a mensagem, vamos deletar essas duas colunas pois nesse projeto não iremos lidar com NLP. 
+ - Para o nome da categoria do produto vamos substituir os valores faltantes por 'missing'.
+ 
+As colunas do tipo **data**:
+ - Essas linhas serão deletadas, já que representam uma porcentagem bem pouca sobre todo o dataset.
+
+Para as colunas **númericas**:
+- adicionar uma coluna indicando que existia valores faltantes
+- substituir os valores faltantes pela moda na coluna original
 
 ---
 
 ## 4. Análise exploratória dos dados
+
+### Análise univariada
+
+Essa análise vamos descrever algumas variáveis examinando a distribuição dos casos de apenas uma variável e cada vez.
+
+O gráfico abaixo nos mostra a distribuição da variável payment_value, que foi o valor da transação da venda, vemos que está bem concentrado em valores aaixo de $1.000 e vimos que na seção [sobre os dados](#2-sobre-os-dados) na parte da estatística descritiva existe valores outliers.
+
+
+Os status das orders dos nossos dados estão bem desbalanceados, como vemos abaixo, a grande maioria das orders já foram enviadas e um valor muito pequeno foram canceladas, com isso podemos ter algum problema a frente.
+
+
+O tipo de pagamento mais utilizado é cartão de crédito, como vemos abaixo, mas vemos que existe compras feitas por voucher, boleto e cartão de débito, também temos que pensar nessa proporção pequena de dados para cartão de débito.
+
+
+Os reviews das vendas são bem positivos, a maioria está entre as notas 4 e 5, e interessante ver que a nota 5 é mais que o dobro maior que a nota 4.
+
+
+A categoria de produtos tem a maior quantidade de orders é a Cama & Mesa & Banho, não muito atrás, as outras seguem bem próximas das maiores do que e.a
+
+
+### Análise bivariada
+
+A análise bivariada nos permite a duas variáveis de forma simultânea, por isso vamos usar-la nesse projeto para responder as nossas hipóteses levantadas anteriormente.
+
+**H1. Clientes que tiveram os seus pedidos enviados após a data da estimativa de entrega não voltam a comprar - FALSA**
+
+
+No gráfico temos que existe sim clientes que receberam os seus produtos após a data de estimativa, então houve algum tipo de atraso. Como a nossa hipótese levantada diz que os clientes tiveram os seus pedidos enviados após a data da estimativa de entrega não voltam a comprar, vamos capturar um exemplo da base onde o cliente comprou e teve atraso e após esse atraso voltou a comprar.
+
+Vemos que na tabela existe um cliente que comprou com atraso e voltar a comprar logo após a compra, assim a hipótese é FALSA.
+
+**H2. Clientes de SP são os que tem o maior volume de compra - VERDADEIRA**
+
+Fica evidente que a hipótese é verdadeira, tanto é que, a cidade RJ tem 63% menos em volume de venda do que SP. Em outras palavras, SP vende mais que o dobro da segunda colocada.
+
+**H3. Clientes que compram com cartão de crédito compra mais que do que aqueles que compram com boleto - VERDADEIRA**
+
+Novamente, é uma hipótese verdadeira, vemos que o método de pagamento cartão de crédito é o mais utilizado do que os outros, do total de venda de 20.418.288,15, o cartão de crédito foi responsável por 15.670.920,67 das vendas da empresa representando 76% do total.
+
+**H4. Clientes que tiveram as suas compras canceladas não voltam a comprar - VERDADEIRA**
+
+
+Essa hipótese é verdadeira, porém devemos levar em consideração que existe uma quantidade bem pouca sobre os clientes que cancelaram suas compras, das 115.711 orders, somente 7 clientes tem status cancelado. Por isso devemos capturar mais dados para realmente provar essa hipótese.
+
+**H5. Clientes que pagam alto valor de frete compram diversos produtos - VERDADEIRA**
+
+
+Hipótese verdadeira, mesmo que tenha algumas quedas na quantidade de produtos vs total pago pelo frete, quanto maior a quantidade de produtos distintos comprados maior é o valor do frete.
+
+
+**H6. Produtos com peso abaixo do primeiro quartil são os mais vendidos em termos de quantidade - FALSA**
+
+Sabemos que o primeiro quartil para a variável é ate 300 gramas, para tal, tivemos 28.071 vendas dos produtos abaixo de 300 gramas e para acima de 300 gramas tivemos 83.316, por isso a hipótese é falsa, produtos mais pesados que 300 gramas tem a maior quantidade vendida.
+
+
+**H7. Categoria do produto mais vendido é aquela relacionada a eletrônicos, pois o valor agregado é alto - VERDADEIRA***
+
+Para os dez primeiros, podemos parcialmente retirar algumas informações já que não temos um campo falando exatamente qual universo o produto se encontra. O produto com o maior valor vendido é relacionado a telefonia fixa, que em maior parte é um eletrônico, também vemos a categoria informática e acessórios, que também é eletrônicos, podemos confirmar essa hipótese, mas com atenção mostrando que existe outras categoria que também vende bem.
+
+**H8. Os produtos que tem mais fotos publicadas são os mais vendidos em termos de valor - FALSA**
+
+Hipótese falsa, não há evidências suficientes que quanto maior a quantidade de fotos publicada do produto, maior é o valor da venda, o gráfico ilustra uma queda no total vendido enquanto a quantidade de fotos publicadas aumenta, pode levar em consideração que o produto que tem 20 fotos publicadas teve total de vendas abaixo do que o produto com 19 fotos publicada.
+
+
+**H9. Produtos com nome longos são menos vendidos - FALSA**
+
+Hipótese falsa, existe exemplos de produtos com nomes longos onde vendeu uma quantidade bem alta.
+
+**H10. Produtos com descrição longas são os mais vendidos - FALSA**
+
+Hipótese falsa, quanto maior o tamanho da descrição do produto menor é a quantidade vendida desse produto.
+
+**H11. Produtos com grandes dimensões(altura, peso, largura...) são menos vendidos, porém tem alto retorno pro negócio - VERDADEIRA**
+
+Definindo que, produtos com grandes dimensões:
+- Peso acima de 10000 gramas (10kg)
+- Comprimento acima de 60cm
+- Altura acima de 60cm
+- Largura acima de 60cm
+
+Dado isso temos que, a hipótese é verdadeira, vemos no gráfico que os produtos grandes tem uma baixa quantidades vendidas mas tem um valor total maior que o restante dos produtos.
+
+**H12. Vendedores de SP são os que mais atrasam os envios - VERDADEIRA**
+
+Hipótese verdadeira, os vendedores do estado de SP são os vendedores que mais atrasam o pedido do cliente.
+
+**H13. Os melhores vendedores, de acordo com a nota do review, são os que mais vendem produtos - FALSA**
+
+Hipótese falsa, vemos que existe um comportamento onde quanto maior a nota do vendedor, menor é a quantidade de produtos vendidos por ele, como exemplo os vendedores com nota entre 4,5 e 5, vendem menos que os vendedores com nota 4. Podemos explica isso também pela quantidade de vendedores que temos com nota maior que 4,5.
+
+**H14. Todas as compras feitas foram parceladas em 2x - FALSA**
+
+Hipótese falsa, as compras são feitas parceladas em diversas parcelas, e fica evidente que a maioria das parcelas não são parceladas, somente 1x,
+
+**H15. Quanto mais alta são as notas dos reviews menor as parcelas - FALSA**
+
+Hipótese falsa, não há evidências o suficiente para confirmar que quanto mais alta são as notas dos reviews menor as parcelas, vemos que não importa a nota do review, vamos ter compras com diversas quantidade de parcelas.
+
+
+**H16. Cartão de crédito é o método de pagamento que mais atrasa o envio para transportadora - VERDADEIRA**
+
+Hipótese verdadeira, vemos que o cartão de crédito é o método de pagamento que mais atrasa o envio para transportadora, isso é resultado de que a maioria das compras feitas na Olist são feitas com cartão de crédito, crescendo a quantidade de atrasos.
+
+**H17. A maioria das compras são feitas antes do dia 15 - VERDADEIRA**
+
+Hipótese verdadeira, por bem pouco, as vendas são feitas antes do dia 15, porém bem apertado para as vendas após o dia 15, atenção nessa hipótese pois pode ser indício de poucos dados para tomar essa decisão.
+
+**H18. Há um aumento no valor de vendas aprovadas no mês de dezembro - FALSA**
+
+Hipótese falsa, dentro de todos os meses dos anos que faz parte do nosso dataset, o mês de Dezembro é onde temos uma queda de vendas, comparado com o mês anterior. Podemos ver também que dezembro é o segundo mês que tem o menor valor total de vendas, somente atrás de setembro.
+
+**H19. Os leads que não fecharam o negócio são os que foram adquiridos por pesquisa orgânica - FALSA**
+
+Hipótese falsa, mesmo que a origem dos leads que ainda não fecharam o negócio é pesquisa orgânica, ainda tem outras negócios não fechados para outras origens.
+
+**H20. Os leads que tem uma empresa formal são a maioria que fecham o negócio - VERDADEIRA**
+
+Hipótese verdadeira, a maioria dos vendedores que pedem requisição para virar parceiro da empresa, a maioria que fecham o negócio são vendedores que possuem empresa formal.
+
 
 ---
 
